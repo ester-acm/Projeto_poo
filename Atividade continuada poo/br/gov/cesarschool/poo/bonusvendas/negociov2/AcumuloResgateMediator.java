@@ -1,14 +1,17 @@
 package br.gov.cesarschool.poo.bonusvendas.negociov2;
 
 import java.time.LocalDate;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import br.gov.cesarschool.poo.bonusvendas.daov2.CaixaDeBonusDAO;
 import br.gov.cesarschool.poo.bonusvendas.daov2.LancamentoBonusDAO;
+import br.gov.cesarschool.poo.bonusvendas.daov2.VendedorDAO;
 import br.gov.cesarschool.poo.bonusvendas.entidade.CaixaDeBonus;
 import br.gov.cesarschool.poo.bonusvendas.entidade.LancamentoBonusCredito;
 import br.gov.cesarschool.poo.bonusvendas.entidade.LancamentoBonusDebito;
@@ -17,7 +20,12 @@ import br.gov.cesarschool.poo.bonusvendas.entidade.Vendedor;
 import br.gov.cesarschool.poo.bonusvendas.excecoes.ExcecaoObjetoJaExistente;
 import br.gov.cesarschool.poo.bonusvendas.excecoes.ExcecaoObjetoNaoExistente;
 import br.gov.cesarschool.poo.bonusvendas.excecoes.ExcecaoValidacao;
-
+import br.gov.cesarschool.poo.bonusvendas.negocio.ComparadorCaixaDeBonusSaldoDec;
+import br.gov.cesarschool.poo.bonusvendas.negocio.ComparadorLancamentoBonusDHDec;
+import br.gov.cesarschool.poo.bonusvendas.negocio.ComparadorVendedorNome;
+import br.gov.cesarschool.poo.bonusvendas.negocio.ComparadorVendedorRenda;
+import br.gov.cesarschool.poo.bonusvendas.util.Ordenadora;
+import br.gov.cesarschool.poo.bonusvendas.entidade.LancamentoBonus;
 
 public class AcumuloResgateMediator {
 	private static final String CAIXA_DE_BONUS_INEXISTENTE = "Caixa de bonus inexistente";
@@ -95,4 +103,63 @@ public class AcumuloResgateMediator {
 			throw new ExcecaoValidacao("Inconsistência no cadastro de lançamento");
 		}
 	}
+	
+	public CaixaDeBonus[] listaCaixaDeBonusPorSaldoMaior(double saldoInicial) {
+		CaixaDeBonus[] caixas = repositorioCaixaDeBonus.buscarTodos();
+		
+		CaixaDeBonus[] selecaoCaixas = Arrays.stream(caixas)
+                .filter(caixa -> caixa.getSaldo() >= saldoInicial)
+                .toArray(CaixaDeBonus[]::new);
+		
+		Ordenadora.ordenar(selecaoCaixas, ComparadorCaixaDeBonusSaldoDec.getInstance());
+		
+		return selecaoCaixas;
+	}
+	
+	public LancamentoBonus[] listaLancamentosPorFaixaData(LocalDate d1, LocalDate d2) {
+        LancamentoBonus[] lancamentos = repositorioLancamento.buscarTodos();
+
+        List<LancamentoBonus> selecaoLancamentos = new ArrayList<>();
+
+        for (LancamentoBonus lancamento : lancamentos) {
+            LocalDate dataHoraLancamento = lancamento.getDataHoraLancamento().toLocalDate();
+            if (!dataHoraLancamento.isBefore(d1) && !dataHoraLancamento.isAfter(d2)) {
+                selecaoLancamentos.add(lancamento);
+            }
+        }
+
+        Collections.sort(selecaoLancamentos, ComparadorLancamentoBonusDHDec.getInstance());
+
+        return selecaoLancamentos.toArray(new LancamentoBonus[0]);
+    }
+	
+	
 }
+
+
+/**
+ * Um novo método público :
+CaixaDeBonus[] listaCaixaDeBonusPorSaldoMaior(double saldoInicial)
+o O método deve chamar o buscar todos do DAO de caixas de bônus, e o
+retorno deste método deve ser filtrado para popular um novo array, que
+deve conter somente as caixas de bônus cujos saldos forem maiores ou
+iguais ao parâmetro “saldoInicial”. Este novo array deve ser ordenado por
+saldo em ordem decrescente e retornado. A ordenação deve ser feita
+usando-se as classes Ordenadora e ComparadorCaixaDeBonusSaldoDec.
+ * 
+ * 
+ * 
+ * 
+ * Um novo método público:
+// O tipo LocalDate dos parâmetros é do pacote JAVA java.time.
+LancamentoBonus[] listaLancamentosPorFaixaData(LocalDate d1, LocalDate d2)
+o O método deve chamar o buscar todos do DAO de lançamentos, e o retorno
+deste método deve ser filtrado para popular um novo array, que deve conter
+somente os lançamentos cujas datas (parte do atributo
+dataHoraLancamento) forem maiores ou iguais ao parâmetro “d1” e
+menores ou iguais ao parâmetro “d2” Este novo array deve estar ordenado
+por data hora lançamento em ordem decrescente para ser retornado. A
+ordenação deve ser feita usando-se as classes Collections (do pacote
+java.util do JAVA) e ComparadorLancamentoBonusDHDec.
+ * 
+ */
