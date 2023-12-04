@@ -10,13 +10,12 @@ public class CaixaDeBonusDAO {
         this.dao = new DAOGenerico(CaixaDeBonus.class);
     }
 
-    public void incluir(CaixaDeBonus caixaBonus) {
-        dao.incluir(caixaBonus);
-    }
-
-    public void alterar(CaixaDeBonus caixaBonus) {
-        dao.alterar(caixaBonus);
-    }
+    public boolean incluir(CaixaDeBonus caixaBonus) {
+		return dao.incluir(caixaBonus); 
+	}
+	public boolean alterar(CaixaDeBonus caixaBonus) {
+		return dao.alterar(caixaBonus);	
+	}
 
     public CaixaDeBonus buscar(long numero) {
         return (CaixaDeBonus) dao.buscar(String.valueOf(numero));

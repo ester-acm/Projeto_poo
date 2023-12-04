@@ -1,7 +1,4 @@
 package br.gov.cesarschool.poo.bonusvendas.util;
-import java.util.List;
-
-import br.gov.cesarschool.poo.bonusvendas.entidade.Vendedor;
 
 public class Ordenadora {
 	

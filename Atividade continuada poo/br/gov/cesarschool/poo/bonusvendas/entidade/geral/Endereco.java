@@ -10,7 +10,7 @@ public class Endereco {
 	private String estado;
 	private String pais;
 	
-	public Endereco(int numero, String logradouro, String complemento, String cep, String cidade, String estado, String pais) {
+	public Endereco(String logradouro, int numero, String complemento, String cep, String cidade, String estado, String pais) {
 		//construtor deve inicializar todos os atributos da classe OK
 		super();
 		this.numero = numero;

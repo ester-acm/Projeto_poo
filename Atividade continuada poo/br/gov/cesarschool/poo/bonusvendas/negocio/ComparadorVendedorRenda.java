@@ -4,11 +4,11 @@ package br.gov.cesarschool.poo.bonusvendas.negocio;
 import br.gov.cesarschool.poo.bonusvendas.util.Comparador;
 import br.gov.cesarschool.poo.bonusvendas.entidade.Vendedor;
 
-public class ComparadorVendededorRenda implements Comparador{
+public class ComparadorVendedorRenda implements Comparador{
 
 	
 	//saying there will only be one instance of this class.
-	private static ComparadorVendededorRenda instancia = null;
+	private static ComparadorVendedorRenda instancia = null;
 	
 	//declaring variables if there are any
 	
@@ -18,7 +18,7 @@ public class ComparadorVendededorRenda implements Comparador{
 	//since calabria asked for a singleton, the singleton classes' constructor
 	//has to be private
 
-	private ComparadorVendededorRenda() {
+	private ComparadorVendedorRenda() {
 
 	}
 	
@@ -26,10 +26,10 @@ public class ComparadorVendededorRenda implements Comparador{
 	//the method can be written with LAZY INITIALIZATION
 	//then, store the instance as a private static variable.
 	
-	public static synchronized ComparadorVendededorRenda getInstance()
+	public static synchronized ComparadorVendedorRenda getInstance()
     {
         if (instancia == null)
-            instancia = new ComparadorVendededorRenda();
+            instancia = new ComparadorVendedorRenda();
  
         return instancia;
     }

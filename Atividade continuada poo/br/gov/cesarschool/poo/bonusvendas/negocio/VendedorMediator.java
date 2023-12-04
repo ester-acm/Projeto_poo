@@ -7,6 +7,7 @@ import br.gov.cesarschool.poo.bonusvendas.dao.VendedorDAO;
 import br.gov.cesarschool.poo.bonusvendas.entidade.Vendedor;
 import br.gov.cesarschool.poo.bonusvendas.negocio.geral.StringUtil;
 import br.gov.cesarschool.poo.bonusvendas.negocio.geral.ValidadorCPF;
+import br.gov.cesarschool.poo.bonusvendas.util.Ordenadora;
 
 public class VendedorMediator {
 	private static VendedorMediator instancia;
@@ -97,4 +98,23 @@ public class VendedorMediator {
 		long yearsDifference = ChronoUnit.YEARS.between(dataNasc, LocalDate.now());
 		return yearsDifference < 17;
 	}
+	
+	public Vendedor[] gerarListagemClienteOrdenadaPorNome() {
+		
+		Vendedor retorno[] = repositorioVendedor.buscarTodos();
+		Ordenadora.ordenar(retorno, ComparadorVendedorNome.getInstance());
+		return retorno;
+	}
+	
+	
+	public Vendedor[] gerarListagemClienteOrdenadaPorRenda() {
+		
+		Vendedor retorno[] = repositorioVendedor.buscarTodos();
+		Ordenadora.ordenar(retorno, ComparadorVendedorRenda.getInstance());
+		return retorno;
+	}
+	
+	
+	
+	
 }

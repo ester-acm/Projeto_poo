@@ -14,13 +14,23 @@ public class DAOGenerico {
        this.setTipo(tipo);
    }
 
-   public void incluir(Registro reg) {
-       cadastro.incluir(reg, reg.getIdUnico());
-   }
-
-   public void alterar(Registro reg) {
-       cadastro.alterar(reg, reg.getIdUnico());
-   }
+   public boolean incluir(Registro reg) {
+		Registro busca = buscar(reg.getIdUnico());
+		if (busca != null) {
+			return false;
+		}
+		cadastro.incluir(reg, reg.getIdUnico());
+		return true;
+	}
+	
+	public boolean alterar(Registro reg) {
+		Registro busca = buscar(reg.getIdUnico());
+		if (busca == null) {
+			return false;
+		}
+		cadastro.alterar(reg, reg.getIdUnico());
+		return true;
+	}
 
    public Registro buscar(String id) {
        return (Registro) cadastro.buscar(id);

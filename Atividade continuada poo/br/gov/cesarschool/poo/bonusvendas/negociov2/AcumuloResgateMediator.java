@@ -44,18 +44,16 @@ public class AcumuloResgateMediator {
 		repositorioLancamento = new LancamentoBonusDAO();
 	}
 
-	public long gerarCaixaDeBonus(Vendedor vendedor) throws ExcecaoObjetoJaExistente, ExcecaoObjetoNaoExistente {
+	public long gerarCaixaDeBonus(Vendedor vendedor) throws ExcecaoObjetoJaExistente{
 		LocalDate dataAtual = LocalDate.now();
 		DateTimeFormatter customFormatter = DateTimeFormatter.ofPattern("yyyyMMdd");
 		long numero = Long.parseLong(vendedor.getCpf().substring(0, 9) + dataAtual.format(customFormatter));
 		CaixaDeBonus caixa = new CaixaDeBonus(numero);
 	
-		try {
-			repositorioCaixaDeBonus.incluir(caixa);
-			return numero;
-		} catch (ExcecaoObjetoJaExistente e) { /*Não está no doc mas só sei fazer com cactch */
-			throw new ExcecaoObjetoJaExistente("Falha ao gerar a Caixa de bonus: " + e.getMessage());
-		}
+		repositorioCaixaDeBonus.incluir(caixa);
+		
+		return caixa.getNumero();
+			
 	}
 
 	public void acumularBonus(long numeroCaixaDeBonus, double valor) throws ExcecaoObjetoNaoExistente, ExcecaoValidacao {
