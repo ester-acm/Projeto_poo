@@ -1,6 +1,7 @@
 package br.gov.cesarschool.poo.bonusvendas.negociov2;
 
 import java.time.LocalDate;
+
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
@@ -13,6 +14,9 @@ import br.gov.cesarschool.poo.bonusvendas.excecoes.ErroValidacao;
 import br.gov.cesarschool.poo.bonusvendas.excecoes.ExcecaoObjetoJaExistente;
 import br.gov.cesarschool.poo.bonusvendas.excecoes.ExcecaoObjetoNaoExistente;
 import br.gov.cesarschool.poo.bonusvendas.excecoes.ExcecaoValidacao;
+import br.gov.cesarschool.poo.bonusvendas.util.Ordenadora;
+import br.gov.cesarschool.poo.bonusvendas.negocio.ComparadorVendedorRenda;
+import br.gov.cesarschool.poo.bonusvendas.negocio.ComparadorVendedorNome;
 
 public class VendedorMediator {
 	private static VendedorMediator instancia;
@@ -27,6 +31,7 @@ public class VendedorMediator {
 	private VendedorMediator() {
 		repositorioVendedor = new VendedorDAO();
 		caixaDeBonusMediator = AcumuloResgateMediator.getInstancia();
+		
 	}
 
 	public long incluir(Vendedor vendedor) throws ExcecaoObjetoJaExistente, ExcecaoValidacao, ExcecaoObjetoNaoExistente{
@@ -106,8 +111,58 @@ public class VendedorMediator {
 		}
 	}
 	
+	
 	private boolean dataNascimentoInvalida(LocalDate dataNasc) {
 		long yearsDifference = ChronoUnit.YEARS.between(dataNasc, LocalDate.now());
 		return yearsDifference < 17;
 	}
+
+
+
+	public Vendedor[] gerarListagemClienteOrdenadaPorNome() {
+		
+		//criando uma instancia local do comparador para poder utilizá-lo, uma vez que o seu metodo comparar é private
+		ComparadorVendedorNome comparadorVN = ComparadorVendedorNome.getInstance();
+	
+		VendedorDAO vendedor = new VendedorDAO();
+		Vendedor[] resultadoBuscaVend = vendedor.buscarTodos();
+	
+		
+		Ordenadora.ordenar(resultadoBuscaVend, comparadorVN);
+		
+		return resultadoBuscaVend;
+	
+	}
+	
+	public Vendedor[] gerarListagemClienteOrdenadaPorRenda() {
+		
+		//criando uma instancia local do comparador para poder utilizá-lo, uma vez que o seu metodo comparar é private
+			ComparadorVendedorRenda comparadorVR = ComparadorVendedorRenda.getInstance();
+			VendedorDAO vendedor = new VendedorDAO();
+	
+			Vendedor[] resultadoBuscaVend = vendedor.buscarTodos();
+			Ordenadora.ordenar(resultadoBuscaVend, comparadorVR);
+			
+			return resultadoBuscaVend;
+	
+		}
+	
+	
+	
 }
+/**Um novo método público Vendedor[] gerarListagemClienteOrdenadaPorNome()
+o O método deve chamar o buscar todos do DAO, e o retorno deste método
+deve ser ordenado e retornado. A ordenação deve ser feita usando-se as
+classes Ordenadora e ComparadorVendedorNome. A listagem retornada
+corresponde à lista de todos os vendedores cadastrados ordenada por nome
+em ordem crescente.
+
+
+
+Um novo método público Vendedor[] gerarListagemClienteOrdenadaPorRenda()
+o O método deve chamar o buscar todos do DAO, e o retorno deste método
+deve ser ordenado e retornado. A ordenação deve ser feita usando-se as
+classes Ordenadora e ComparadorVendedorRenda. A listagem retornada
+corresponde à lista de todos os vendedores cadastrados ordenada por renda
+em ordem crescente.
+**/
