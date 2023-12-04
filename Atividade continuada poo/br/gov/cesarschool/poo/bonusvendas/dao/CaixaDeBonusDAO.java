@@ -2,25 +2,28 @@ package br.gov.cesarschool.poo.bonusvendas.dao;
 
 import br.gov.cesarschool.poo.bonusvendas.entidade.CaixaDeBonus;
 import br.gov.cesarschool.poo.bonusvendas.entidade.geral.Registro;
+import br.gov.cesarschool.poo.bonusvendas.excecoes.ExcecaoObjetoJaExistente;
+import br.gov.cesarschool.poo.bonusvendas.excecoes.ExcecaoObjetoNaoExistente;
+
 
 public class CaixaDeBonusDAO {
     private final DAOGenerico dao;
 
     public CaixaDeBonusDAO() {
-        this.dao = new DAOGenerico(CaixaDeBonus.class);
+        this.dao = new DAOGenerico(CaixaDeBonus.class, "Caixa");
     }
 
-    public void incluir(CaixaDeBonus caixaBonus) {
-        dao.incluir(caixaBonus);
-    }
-
-    public void alterar(CaixaDeBonus caixaBonus) {
-        dao.alterar(caixaBonus);
-    }
-
-    public CaixaDeBonus buscar(long numero) {
-        return (CaixaDeBonus) dao.buscar(String.valueOf(numero));
-    }
+    public void incluir(CaixaDeBonus caixaBonus) throws ExcecaoObjetoJaExistente, ExcecaoObjetoNaoExistente{
+		dao.incluir(caixaBonus); 
+	}
+	
+	public void alterar(CaixaDeBonus caixaBonus) throws ExcecaoObjetoNaoExistente{
+		dao.alterar(caixaBonus);	
+	}
+	
+	public CaixaDeBonus buscar(long codigo) throws ExcecaoObjetoNaoExistente{
+		return(CaixaDeBonus)dao.buscar("" + codigo);
+	}
 
     public CaixaDeBonus[] buscarTodos() {
         Registro[] registros = dao.buscarTodos();

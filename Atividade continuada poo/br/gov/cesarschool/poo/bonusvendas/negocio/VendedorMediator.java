@@ -1,12 +1,22 @@
 package br.gov.cesarschool.poo.bonusvendas.negocio;
 
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 
-import br.gov.cesarschool.poo.bonusvendas.dao.VendedorDAO;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+
+import br.gov.cesarschool.poo.bonusvendas.daov2.VendedorDAO;
 import br.gov.cesarschool.poo.bonusvendas.entidade.Vendedor;
+import br.gov.cesarschool.poo.bonusvendas.entidade.geral.Endereco;
 import br.gov.cesarschool.poo.bonusvendas.negocio.geral.StringUtil;
 import br.gov.cesarschool.poo.bonusvendas.negocio.geral.ValidadorCPF;
+import br.gov.cesarschool.poo.bonusvendas.excecoes.ErroValidacao;
+import br.gov.cesarschool.poo.bonusvendas.excecoes.ExcecaoObjetoJaExistente;
+import br.gov.cesarschool.poo.bonusvendas.excecoes.ExcecaoObjetoNaoExistente;
+import br.gov.cesarschool.poo.bonusvendas.excecoes.ExcecaoValidacao;
+import br.gov.cesarschool.poo.bonusvendas.util.Ordenadora;
+import br.gov.cesarschool.poo.bonusvendas.negocio.ComparadorVendedorRenda;
+import br.gov.cesarschool.poo.bonusvendas.negocio.ComparadorVendedorNome;
 
 public class VendedorMediator {
 	private static VendedorMediator instancia;
@@ -21,80 +31,123 @@ public class VendedorMediator {
 	private VendedorMediator() {
 		repositorioVendedor = new VendedorDAO();
 		caixaDeBonusMediator = AcumuloResgateMediator.getInstancia();
+		
 	}
-	public ResultadoInclusaoVendedor incluir(Vendedor vendedor) {
-		long numeroCaixaBonus = 0;
-		String msg = validar(vendedor);
-		if (msg == null) {
-			boolean ret = repositorioVendedor.incluir(vendedor);
-			if (!ret) {
-				msg = "Vendedor ja existente";
-			} else {
-				numeroCaixaBonus = caixaDeBonusMediator.gerarCaixaDeBonus(vendedor);
-				if (numeroCaixaBonus == 0) {
-					msg = "Caixa de bonus nao foi gerada";					
-				}
-			}
-		}
-		return new ResultadoInclusaoVendedor(numeroCaixaBonus, msg);
+
+	public long incluir(Vendedor vendedor) throws ExcecaoObjetoJaExistente, ExcecaoValidacao, ExcecaoObjetoNaoExistente{
+		validar(vendedor);
+		repositorioVendedor.incluir(vendedor);
+		return caixaDeBonusMediator.gerarCaixaDeBonus(vendedor);
 	}
-	public String alterar(Vendedor vendedor) {
-		String msg = validar(vendedor);
-		if (msg == null) {
-			boolean ret = repositorioVendedor.alterar(vendedor);
-			if (!ret) {
-				msg = "Vendedor inexistente";
-			}
-		}
-		return msg;
+
+	public void alterar(Vendedor vendedor) throws ExcecaoObjetoNaoExistente, ExcecaoValidacao {
+		validar(vendedor);
+		repositorioVendedor.alterar(vendedor);
 	}
-	private String validar(Vendedor vendedor) {
+
+	public Vendedor buscar(String cpf) throws ExcecaoObjetoNaoExistente {
+        return repositorioVendedor.buscar(cpf);
+    }
+
+	private void validar(Vendedor vendedor) throws ExcecaoValidacao {
+		ArrayList<ErroValidacao> erros = new ArrayList<>();
+	
 		if (StringUtil.ehNuloOuBranco(vendedor.getCpf())) {
-			return "CPF nao informado";
+			erros.add(new ErroValidacao(1, "CPF nao informado"));
+		} else if (!ValidadorCPF.ehCpfValido(vendedor.getCpf())) {
+			erros.add(new ErroValidacao(2, "CPF invalido"));
 		}
-		if (!ValidadorCPF.ehCpfValido(vendedor.getCpf())) {
-			return "CPF invalido";
-		}
+	
 		if (StringUtil.ehNuloOuBranco(vendedor.getNomeCompleto())) {
-			return "Nome completo nao informado";
+			erros.add(new ErroValidacao(3, "Nome completo nao informado"));
 		}
+	
 		if (vendedor.getSexo() == null) {
-			return "Sexo nao informado";
+			erros.add(new ErroValidacao(4, "Sexo nao informado"));
 		}
+	
 		if (vendedor.getDataNascimento() == null) {
-			return "Data de nascimento nao informada";
+			erros.add(new ErroValidacao(5, "Data de nascimento nao informada"));
+		} else if (dataNascimentoInvalida(vendedor.getDataNascimento())) {
+			erros.add(new ErroValidacao(6, "Data de nascimento invalida"));
 		}
-		if (dataNascimentoInvalida(vendedor.getDataNascimento())) {
-			return "Data de nascimento invalida";
-		}
+	
 		if (vendedor.getRenda() < 0) {
-			return "Renda menor que zero";			
+			erros.add(new ErroValidacao(7, "Renda menor que zero"));
 		}
+	
 		if (vendedor.getEndereco() == null) {
-			return "Endereco nao informado";
+			erros.add(new ErroValidacao(8, "Endereco nao informado"));
+		} else {
+			validarEndereco(vendedor.getEndereco(), erros);
 		}
-		if (StringUtil.ehNuloOuBranco(vendedor.getEndereco().getLogradouro())) {
-			return "Logradouro nao informado";
+	
+		if (!erros.isEmpty()) {
+			throw new ExcecaoValidacao(erros);
 		}
-		if (vendedor.getEndereco().getLogradouro().length() < 4) {
-			return "Logradouro tem menos de 04 caracteres";
-		}		
-		if (vendedor.getEndereco().getNumero() < 0) {
-			return "Numero menor que zero";
-		}				
-		if (StringUtil.ehNuloOuBranco(vendedor.getEndereco().getCidade())) {
-			return "Cidade nao informada";
-		}
-		if (StringUtil.ehNuloOuBranco(vendedor.getEndereco().getEstado())) {
-			return "Estado nao informado";
-		}		
-		if (StringUtil.ehNuloOuBranco(vendedor.getEndereco().getPais())) {
-			return "Pais nao informado";
-		}					
-		return null;
 	}
+	
+	private void validarEndereco(Endereco endereco, ArrayList<ErroValidacao> erros) {
+		if (StringUtil.ehNuloOuBranco(endereco.getLogradouro())) {
+			erros.add(new ErroValidacao(9, "Logradouro nao informado"));
+		} else if (endereco.getLogradouro().length() < 4) {
+			erros.add(new ErroValidacao(10, "Logradouro tem menos de 04 caracteres"));
+		}
+	
+		if (endereco.getNumero() < 0) {
+			erros.add(new ErroValidacao(11, "Numero menor que zero"));
+		}
+	
+		if (StringUtil.ehNuloOuBranco(endereco.getCidade())) {
+			erros.add(new ErroValidacao(12, "Cidade nao informada"));
+		}
+	
+		if (StringUtil.ehNuloOuBranco(endereco.getEstado())) {
+			erros.add(new ErroValidacao(13, "Estado nao informado"));
+		}
+	
+		if (StringUtil.ehNuloOuBranco(endereco.getPais())) {
+			erros.add(new ErroValidacao(14, "Pais nao informado"));
+		}
+	}
+	
+	
 	private boolean dataNascimentoInvalida(LocalDate dataNasc) {
 		long yearsDifference = ChronoUnit.YEARS.between(dataNasc, LocalDate.now());
 		return yearsDifference < 17;
 	}
+
+
+
+	public Vendedor[] gerarListagemClienteOrdenadaPorNome() {
+			
+			Vendedor retorno[] = repositorioVendedor.buscarTodos();
+			Ordenadora.ordenar(retorno, ComparadorVendedorNome.getInstance());
+			return retorno;
+		}
+		
+		
+		public Vendedor[] gerarListagemClienteOrdenadaPorRenda() {
+			
+			Vendedor retorno[] = repositorioVendedor.buscarTodos();
+			Ordenadora.ordenar(retorno, ComparadorVendedorRenda.getInstance());
+			return retorno;
+		}
+		
 }
+/**Um novo método público Vendedor[] gerarListagemClienteOrdenadaPorNome()
+o O método deve chamar o buscar todos do DAO, e o retorno deste método
+deve ser ordenado e retornado. A ordenação deve ser feita usando-se as
+classes Ordenadora e ComparadorVendedorNome. A listagem retornada
+corresponde à lista de todos os vendedores cadastrados ordenada por nome
+em ordem crescente.
+
+
+
+Um novo método público Vendedor[] gerarListagemClienteOrdenadaPorRenda()
+o O método deve chamar o buscar todos do DAO, e o retorno deste método
+deve ser ordenado e retornado. A ordenação deve ser feita usando-se as
+classes Ordenadora e ComparadorVendedorRenda. A listagem retornada
+corresponde à lista de todos os vendedores cadastrados ordenada por renda
+em ordem crescente.
+**/

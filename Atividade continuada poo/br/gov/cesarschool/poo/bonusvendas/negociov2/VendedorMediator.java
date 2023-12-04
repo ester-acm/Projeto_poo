@@ -120,35 +120,20 @@ public class VendedorMediator {
 
 
 	public Vendedor[] gerarListagemClienteOrdenadaPorNome() {
-		
-		//criando uma instancia local do comparador para poder utilizá-lo, uma vez que o seu metodo comparar é private
-		ComparadorVendedorNome comparadorVN = ComparadorVendedorNome.getInstance();
-	
-		VendedorDAO vendedor = new VendedorDAO();
-		Vendedor[] resultadoBuscaVend = vendedor.buscarTodos();
-	
-		
-		Ordenadora.ordenar(resultadoBuscaVend, comparadorVN);
-		
-		return resultadoBuscaVend;
-	
-	}
-	
-	public Vendedor[] gerarListagemClienteOrdenadaPorRenda() {
-		
-		//criando uma instancia local do comparador para poder utilizá-lo, uma vez que o seu metodo comparar é private
-			ComparadorVendedorRenda comparadorVR = ComparadorVendedorRenda.getInstance();
-			VendedorDAO vendedor = new VendedorDAO();
-	
-			Vendedor[] resultadoBuscaVend = vendedor.buscarTodos();
-			Ordenadora.ordenar(resultadoBuscaVend, comparadorVR);
 			
-			return resultadoBuscaVend;
-	
+			Vendedor retorno[] = repositorioVendedor.buscarTodos();
+			Ordenadora.ordenar(retorno, ComparadorVendedorNome.getInstance());
+			return retorno;
 		}
-	
-	
-	
+		
+		
+		public Vendedor[] gerarListagemClienteOrdenadaPorRenda() {
+			
+			Vendedor retorno[] = repositorioVendedor.buscarTodos();
+			Ordenadora.ordenar(retorno, ComparadorVendedorRenda.getInstance());
+			return retorno;
+		}
+		
 }
 /**Um novo método público Vendedor[] gerarListagemClienteOrdenadaPorNome()
 o O método deve chamar o buscar todos do DAO, e o retorno deste método
