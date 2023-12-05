@@ -38,7 +38,11 @@ public class TesteDAO extends TesteGeral {
 	public void testIdVendedor() {
 		Vendedor vend = new Vendedor(CPF_VALIDO, NOME_VALIDO, 
 				Sexo.MASCULINO, DATA_NASC_VALIDA, RENDA_VALIDA,
+<<<<<<< HEAD
 		        new Endereco(LOGR_VALIDO, NUMERO_VALIDO, COMPL_VALIDO, CEP_VALIDO, 
+=======
+		        new Endereco(NUMERO_VALIDO, LOGR_VALIDO, COMPL_VALIDO, CEP_VALIDO, 
+>>>>>>> 5d91b3eba25847baf4969fbf7bef4521ae2421e1
 		        		CIDADE_VALIDA, ESTADO_VALIDO, PAIS_VALIDO));
 		Assertions.assertTrue(vend instanceof Registro);
 		Assertions.assertEquals(CPF_VALIDO,vend.getIdUnico());
@@ -89,11 +93,19 @@ public class TesteDAO extends TesteGeral {
 		testDaoAux(VendedorDAO.class, "VendedorDAO.java"); 
 		Vendedor vend1 = new Vendedor(CPF_VALIDO, NOME_VALIDO, 
 				Sexo.MASCULINO, DATA_NASC_VALIDA, RENDA_VALIDA,
+<<<<<<< HEAD
 		        new Endereco(LOGR_VALIDO, NUMERO_VALIDO, COMPL_VALIDO, CEP_VALIDO, 
 		        		CIDADE_VALIDA, ESTADO_VALIDO, PAIS_VALIDO));
 		Vendedor vend2 = new Vendedor(OUTRO_CPF_VALIDO, NOME_VALIDO + SUF_NEW, 
 				Sexo.FEMININO, DATA_NASC_VALIDA, RENDA_VALIDA + 200.00,
 		        new Endereco(LOGR_VALIDO + SUF_NEW, NUMERO_VALIDO + 2, COMPL_VALIDO + SUF_NEW, CEP_VALIDO + SUF_NEW, 
+=======
+		        new Endereco(NUMERO_VALIDO, LOGR_VALIDO, COMPL_VALIDO, CEP_VALIDO, 
+		        		CIDADE_VALIDA, ESTADO_VALIDO, PAIS_VALIDO));
+		Vendedor vend2 = new Vendedor(OUTRO_CPF_VALIDO, NOME_VALIDO + SUF_NEW, 
+				Sexo.FEMININO, DATA_NASC_VALIDA, RENDA_VALIDA + 200.00,
+		        new Endereco(NUMERO_VALIDO + 2, LOGR_VALIDO + SUF_NEW, COMPL_VALIDO + SUF_NEW, CEP_VALIDO + SUF_NEW, 
+>>>>>>> 5d91b3eba25847baf4969fbf7bef4521ae2421e1
 		        		CIDADE_VALIDA + SUF_NEW, ESTADO_VALIDO + SUF_NEW, PAIS_VALIDO + SUF_NEW));			
 		VendedorDAO dao = new VendedorDAO();
 		cadastroVend.incluir(vend1, vend1.getIdUnico());
@@ -141,7 +153,11 @@ public class TesteDAO extends TesteGeral {
 		excluirVendedoresCaixasBonusLancamentos();
 		Vendedor vend = new Vendedor(CPF_VALIDO, NOME_VALIDO, 
 				Sexo.MASCULINO, DATA_NASC_VALIDA, RENDA_VALIDA,
+<<<<<<< HEAD
 		        new Endereco(LOGR_VALIDO, NUMERO_VALIDO, COMPL_VALIDO, CEP_VALIDO, 
+=======
+		        new Endereco(NUMERO_VALIDO, LOGR_VALIDO, COMPL_VALIDO, CEP_VALIDO, 
+>>>>>>> 5d91b3eba25847baf4969fbf7bef4521ae2421e1
 		        		CIDADE_VALIDA, ESTADO_VALIDO, PAIS_VALIDO));
 		DAOGenerico daoVend = new DAOGenerico(Vendedor.class);
 		boolean res = daoVend.incluir(vend);
@@ -157,12 +173,20 @@ public class TesteDAO extends TesteGeral {
 		excluirVendedoresCaixasBonusLancamentos();
 		Vendedor vend = new Vendedor(CPF_VALIDO, NOME_VALIDO, 
 				Sexo.MASCULINO, DATA_NASC_VALIDA, RENDA_VALIDA,
+<<<<<<< HEAD
 		        new Endereco(LOGR_VALIDO, NUMERO_VALIDO, COMPL_VALIDO, CEP_VALIDO, 
+=======
+		        new Endereco(NUMERO_VALIDO, LOGR_VALIDO, COMPL_VALIDO, CEP_VALIDO, 
+>>>>>>> 5d91b3eba25847baf4969fbf7bef4521ae2421e1
 		        		CIDADE_VALIDA, ESTADO_VALIDO, PAIS_VALIDO));
 		cadastroVend.incluir(vend, CPF_VALIDO);
 		Vendedor vend1 = new Vendedor(CPF_VALIDO, NOME_VALIDO + SUF_NEW, 
 				Sexo.FEMININO, DATA_NASC_VALIDA, RENDA_VALIDA + 100.0,
+<<<<<<< HEAD
 		        new Endereco(LOGR_VALIDO + SUF_NEW, NUMERO_VALIDO + 100, COMPL_VALIDO + SUF_NEW, CEP_VALIDO + SUF_NEW, 
+=======
+		        new Endereco(NUMERO_VALIDO + 100, LOGR_VALIDO + SUF_NEW, COMPL_VALIDO + SUF_NEW, CEP_VALIDO + SUF_NEW, 
+>>>>>>> 5d91b3eba25847baf4969fbf7bef4521ae2421e1
 		        		CIDADE_VALIDA + SUF_NEW, ESTADO_VALIDO + SUF_NEW, PAIS_VALIDO + SUF_NEW));			
 		DAOGenerico daoVend = new DAOGenerico(Vendedor.class);
 		boolean res = daoVend.incluir(vend1);
@@ -178,12 +202,20 @@ public class TesteDAO extends TesteGeral {
 		excluirVendedoresCaixasBonusLancamentos();
 		Vendedor vend = new Vendedor(CPF_VALIDO, NOME_VALIDO, 
 				Sexo.MASCULINO, DATA_NASC_VALIDA, RENDA_VALIDA,
+<<<<<<< HEAD
 		        new Endereco(LOGR_VALIDO, NUMERO_VALIDO, COMPL_VALIDO, CEP_VALIDO, 
+=======
+		        new Endereco(NUMERO_VALIDO, LOGR_VALIDO, COMPL_VALIDO, CEP_VALIDO, 
+>>>>>>> 5d91b3eba25847baf4969fbf7bef4521ae2421e1
 		        		CIDADE_VALIDA, ESTADO_VALIDO, PAIS_VALIDO));
 		cadastroVend.incluir(vend, CPF_VALIDO);
 		Vendedor vend1 = new Vendedor(CPF_VALIDO, NOME_VALIDO + SUF_NEW, 
 				Sexo.FEMININO, DATA_NASC_VALIDA, RENDA_VALIDA + 100.0,
+<<<<<<< HEAD
 		        new Endereco(LOGR_VALIDO + SUF_NEW, NUMERO_VALIDO + 100, COMPL_VALIDO + SUF_NEW, CEP_VALIDO + SUF_NEW, 
+=======
+		        new Endereco(NUMERO_VALIDO + 100, LOGR_VALIDO + SUF_NEW, COMPL_VALIDO + SUF_NEW, CEP_VALIDO + SUF_NEW, 
+>>>>>>> 5d91b3eba25847baf4969fbf7bef4521ae2421e1
 		        		CIDADE_VALIDA + SUF_NEW, ESTADO_VALIDO + SUF_NEW, PAIS_VALIDO + SUF_NEW));			
 		DAOGenerico daoVend = new DAOGenerico(Vendedor.class);
 		boolean res = daoVend.alterar(vend1);
@@ -199,12 +231,20 @@ public class TesteDAO extends TesteGeral {
 		excluirVendedoresCaixasBonusLancamentos();
 		Vendedor vend = new Vendedor(CPF_VALIDO, NOME_VALIDO, 
 				Sexo.MASCULINO, DATA_NASC_VALIDA, RENDA_VALIDA,
+<<<<<<< HEAD
 		        new Endereco(LOGR_VALIDO, NUMERO_VALIDO, COMPL_VALIDO, CEP_VALIDO, 
+=======
+		        new Endereco(NUMERO_VALIDO, LOGR_VALIDO, COMPL_VALIDO, CEP_VALIDO, 
+>>>>>>> 5d91b3eba25847baf4969fbf7bef4521ae2421e1
 		        		CIDADE_VALIDA, ESTADO_VALIDO, PAIS_VALIDO));
 		cadastroVend.incluir(vend, CPF_VALIDO);
 		Vendedor vend1 = new Vendedor(OUTRO_CPF_VALIDO, NOME_VALIDO + SUF_NEW, 
 				Sexo.FEMININO, DATA_NASC_VALIDA, RENDA_VALIDA + 100.0,
+<<<<<<< HEAD
 		        new Endereco(LOGR_VALIDO + SUF_NEW, NUMERO_VALIDO + 100, COMPL_VALIDO + SUF_NEW, CEP_VALIDO + SUF_NEW, 
+=======
+		        new Endereco(NUMERO_VALIDO + 100, LOGR_VALIDO + SUF_NEW, COMPL_VALIDO + SUF_NEW, CEP_VALIDO + SUF_NEW, 
+>>>>>>> 5d91b3eba25847baf4969fbf7bef4521ae2421e1
 		        		CIDADE_VALIDA + SUF_NEW, ESTADO_VALIDO + SUF_NEW, PAIS_VALIDO + SUF_NEW));			
 		DAOGenerico daoVend = new DAOGenerico(Vendedor.class);
 		boolean res = daoVend.alterar(vend1);

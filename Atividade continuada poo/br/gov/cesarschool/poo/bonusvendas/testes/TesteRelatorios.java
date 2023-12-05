@@ -22,6 +22,10 @@ import br.gov.cesarschool.poo.bonusvendas.entidade.geral.Sexo;
 import br.gov.cesarschool.poo.bonusvendas.negocio.AcumuloResgateMediator;
 import br.gov.cesarschool.poo.bonusvendas.negocio.ComparadorCaixaDeBonusSaldoDec;
 import br.gov.cesarschool.poo.bonusvendas.negocio.ComparadorLancamentoBonusDHDec;
+<<<<<<< HEAD
+=======
+import br.gov.cesarschool.poo.bonusvendas.negocio.ComparadorVendedorRenda;
+>>>>>>> 5d91b3eba25847baf4969fbf7bef4521ae2421e1
 import br.gov.cesarschool.poo.bonusvendas.negocio.ComparadorVendedorNome;
 import br.gov.cesarschool.poo.bonusvendas.negocio.ComparadorVendedorRenda;
 import br.gov.cesarschool.poo.bonusvendas.negocio.VendedorMediator;

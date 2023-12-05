@@ -20,7 +20,11 @@ public class TesteEntidades {
 		Vendedor vend = new Vendedor("12345678901", "Carlos Calmon", Sexo.MASCULINO, 
 		        dataNasc,
 		        2500.0,
+<<<<<<< HEAD
 		        new Endereco("RUA A", 101, "BL B", "51001001", "RECIFE", "PE", "BRASIL"));
+=======
+		        new Endereco(101, "RUA A", "BL B", "51001001", "RECIFE", "PE", "BRASIL"));
+>>>>>>> 5d91b3eba25847baf4969fbf7bef4521ae2421e1
 		int idadeEsp = (int)ChronoUnit.YEARS.between(dataNasc, LocalDate.now());
 		int idade = vend.calcularIdade();
 		Assertions.assertEquals(idadeEsp, idade);		

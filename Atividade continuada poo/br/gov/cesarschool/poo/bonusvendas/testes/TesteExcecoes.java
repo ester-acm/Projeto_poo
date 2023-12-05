@@ -26,6 +26,10 @@ import br.gov.cesarschool.poo.bonusvendas.excecoes.ExcecaoValidacao;
 import br.gov.cesarschool.poo.bonusvendas.negocio.ResultadoInclusaoVendedor;
 import br.gov.cesarschool.poo.bonusvendas.negociov2.VendedorMediator;
 import br.gov.cesarschool.poo.bonusvendas.negociov2.AcumuloResgateMediator;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5d91b3eba25847baf4969fbf7bef4521ae2421e1
 import x.y.z.w.k.Glosb;
 
 public class TesteExcecoes extends TesteGeral {
@@ -95,7 +99,11 @@ public class TesteExcecoes extends TesteGeral {
 		}
 		try {
 			dao.incluir(cb);
+<<<<<<< HEAD
 			Assertions.fail("ExcecaoObjetoJaExistente deveria ter sido lan�ada!");
+=======
+			Assertions.fail("ExcecaoObjetoJaExistente deveria ter sido lançada!");
+>>>>>>> 5d91b3eba25847baf4969fbf7bef4521ae2421e1
 		} catch (ExcecaoObjetoJaExistente e) {			
 			Assertions.assertEquals("CB ja existente",e.getMessage());
 		} 
@@ -122,7 +130,11 @@ public class TesteExcecoes extends TesteGeral {
 		}
 		try {
 			dao.buscar("2");
+<<<<<<< HEAD
 			Assertions.fail("ExcecaoObjetoNaoExistente deveria ter sido lan�ada!");
+=======
+			Assertions.fail("ExcecaoObjetoNaoExistente deveria ter sido lançada!");
+>>>>>>> 5d91b3eba25847baf4969fbf7bef4521ae2421e1
 		} catch (ExcecaoObjetoNaoExistente e) {			
 			Assertions.assertEquals("CB nao existente",e.getMessage());
 		} 				
@@ -138,7 +150,11 @@ public class TesteExcecoes extends TesteGeral {
 		cadastroCaixaBonus.incluir(cb, numero + BRANCO);
 		Vendedor vend = new Vendedor(OUTRO_CPF_VALIDO, NOME_VALIDO, 
 				Sexo.MASCULINO, DATA_NASC_VALIDA, RENDA_VALIDA,
+<<<<<<< HEAD
 		        new Endereco(LOGR_VALIDO, NUMERO_VALIDO, COMPL_VALIDO, CEP_VALIDO, 
+=======
+		        new Endereco(NUMERO_VALIDO, LOGR_VALIDO, COMPL_VALIDO, CEP_VALIDO, 
+>>>>>>> 5d91b3eba25847baf4969fbf7bef4521ae2421e1
 		        		CIDADE_VALIDA, ESTADO_VALIDO, PAIS_VALIDO));
 		try {
 			numeroRet = AcumuloResgateMediator.getInstancia().gerarCaixaDeBonus(vend);
@@ -170,11 +186,19 @@ public class TesteExcecoes extends TesteGeral {
 		cadastroCaixaBonus.incluir(cb, numero + BRANCO);
 		Vendedor vend = new Vendedor(CPF_VALIDO, NOME_VALIDO, 
 				Sexo.MASCULINO, DATA_NASC_VALIDA, RENDA_VALIDA,
+<<<<<<< HEAD
 		        new Endereco(LOGR_VALIDO, NUMERO_VALIDO, COMPL_VALIDO, CEP_VALIDO, 
 		        		CIDADE_VALIDA, ESTADO_VALIDO, PAIS_VALIDO));
 		try {
 			numeroRet = AcumuloResgateMediator.getInstancia().gerarCaixaDeBonus(vend);
 			Assertions.fail("ExcecaoObjetoJaExistente deveria ter sido lan�ada!");
+=======
+		        new Endereco(NUMERO_VALIDO, LOGR_VALIDO, COMPL_VALIDO, CEP_VALIDO, 
+		        		CIDADE_VALIDA, ESTADO_VALIDO, PAIS_VALIDO));
+		try {
+			numeroRet = AcumuloResgateMediator.getInstancia().gerarCaixaDeBonus(vend);
+			Assertions.fail("ExcecaoObjetoJaExistente deveria ter sido lançada!");
+>>>>>>> 5d91b3eba25847baf4969fbf7bef4521ae2421e1
 		} catch (ExcecaoObjetoJaExistente e) {
 			Assertions.assertEquals("Caixa ja existente", e.getMessage());
 		}
@@ -224,7 +248,11 @@ public class TesteExcecoes extends TesteGeral {
 		cadastroCaixaBonus.incluir(cb, numero + BRANCO);
 		try {
 			mediator.acumularBonus(numero, -100.0);
+<<<<<<< HEAD
 			Assertions.fail("1 - ExcecaoValidacao deveria ter sido lan�ada!");
+=======
+			Assertions.fail("1 - ExcecaoValidacao deveria ter sido lançada!");
+>>>>>>> 5d91b3eba25847baf4969fbf7bef4521ae2421e1
 		} catch (ExcecaoValidacao e) {
 			Assertions.assertEquals(VALOR_MENOR_OU_IGUAL_A_ZERO, e.getMessage());
 		} catch (Exception e) {
@@ -232,7 +260,11 @@ public class TesteExcecoes extends TesteGeral {
 		}
 		try {
 			mediator.acumularBonus(numero, 0.0);
+<<<<<<< HEAD
 			Assertions.fail("2 - ExcecaoValidacao deveria ter sido lan�ada!");
+=======
+			Assertions.fail("2 - ExcecaoValidacao deveria ter sido lançada!");
+>>>>>>> 5d91b3eba25847baf4969fbf7bef4521ae2421e1
 		} catch (ExcecaoValidacao e) {
 			Assertions.assertEquals(VALOR_MENOR_OU_IGUAL_A_ZERO, e.getMessage());
 		} catch (Exception e) {
@@ -240,7 +272,11 @@ public class TesteExcecoes extends TesteGeral {
 		}
 		try {
 			mediator.acumularBonus(2, 100.0);
+<<<<<<< HEAD
 			Assertions.fail("3- ExcecaoObjetoNaoExistente deveria ter sido lan�ada!");
+=======
+			Assertions.fail("3- ExcecaoObjetoNaoExistente deveria ter sido lançada!");
+>>>>>>> 5d91b3eba25847baf4969fbf7bef4521ae2421e1
 		} catch (ExcecaoObjetoNaoExistente e) {
 			Assertions.assertEquals(CAIXA_NAO_EXISTENTE, e.getMessage());
 		} catch (Exception e) {
@@ -293,7 +329,11 @@ public class TesteExcecoes extends TesteGeral {
 		
 		try {
 			mediator.resgatar(numero, -100.0, TipoResgate.CASH);
+<<<<<<< HEAD
 			Assertions.fail("4 - ExcecaoValidacao deveria ter sido lan�ada!");
+=======
+			Assertions.fail("4 - ExcecaoValidacao deveria ter sido lançada!");
+>>>>>>> 5d91b3eba25847baf4969fbf7bef4521ae2421e1
 		} catch (ExcecaoValidacao e) {
 			Assertions.assertEquals(VALOR_MENOR_OU_IGUAL_A_ZERO, e.getMessage());
 		} catch (Exception e) {
@@ -301,7 +341,11 @@ public class TesteExcecoes extends TesteGeral {
 		}
 		try {
 			mediator.resgatar(numero, 0.0, TipoResgate.SERVICO);
+<<<<<<< HEAD
 			Assertions.fail("5 - ExcecaoValidacao deveria ter sido lan�ada!");
+=======
+			Assertions.fail("5 - ExcecaoValidacao deveria ter sido lançada!");
+>>>>>>> 5d91b3eba25847baf4969fbf7bef4521ae2421e1
 		} catch (ExcecaoValidacao e) {
 			Assertions.assertEquals(VALOR_MENOR_OU_IGUAL_A_ZERO, e.getMessage());
 		} catch (Exception e) {
@@ -309,7 +353,11 @@ public class TesteExcecoes extends TesteGeral {
 		}
 		try {
 			mediator.resgatar(2, 100.0, TipoResgate.PRODUTO);
+<<<<<<< HEAD
 			Assertions.fail("6- ExcecaoObjetoNaoExistente deveria ter sido lan�ada!");
+=======
+			Assertions.fail("6- ExcecaoObjetoNaoExistente deveria ter sido lançada!");
+>>>>>>> 5d91b3eba25847baf4969fbf7bef4521ae2421e1
 		} catch (ExcecaoObjetoNaoExistente e) {
 			Assertions.assertEquals(CAIXA_NAO_EXISTENTE, e.getMessage());
 		} catch (Exception e) {
@@ -317,7 +365,11 @@ public class TesteExcecoes extends TesteGeral {
 		}
 		try {
 			mediator.resgatar(numero, 1004.0, TipoResgate.CASH);
+<<<<<<< HEAD
 			Assertions.fail("7- ExcecaoValidacao deveria ter sido lan�ada!");
+=======
+			Assertions.fail("7- ExcecaoValidacao deveria ter sido lançada!");
+>>>>>>> 5d91b3eba25847baf4969fbf7bef4521ae2421e1
 		} catch (ExcecaoValidacao e) {
 			Assertions.assertEquals("Saldo insuficiente", e.getMessage());
 		} catch (Exception e) {
@@ -334,9 +386,15 @@ public class TesteExcecoes extends TesteGeral {
 	public void testAlteracaoVendedorInvalido() {		
 		Vendedor vend1 = new Vendedor(null, " ", null, null, -10.0, null);
 		Vendedor vend2 = new Vendedor("12345678901", "Carlos", Sexo.MASCULINO, LocalDate.parse("2022-01-01"), 10.0, 
+<<<<<<< HEAD
 				new Endereco("", -1, null, null, "     ", null, " "));
 		Vendedor vend3 = new Vendedor(CPF_VALIDO, "Maura", Sexo.FEMININO, LocalDate.parse("1998-01-01"), 1000.0, 
 				new Endereco("ABC", 12, "BL B", "51020101", "Recife","PE", "BR"));
+=======
+				new Endereco(-1, "", null, null, "     ", null, " "));
+		Vendedor vend3 = new Vendedor(CPF_VALIDO, "Maura", Sexo.FEMININO, LocalDate.parse("1998-01-01"), 1000.0, 
+				new Endereco(12, "ABC", "BL B", "51020101", "Recife","PE", "BR"));
+>>>>>>> 5d91b3eba25847baf4969fbf7bef4521ae2421e1
 		testAlteracaoVendedorInvalidoAux(vend1, MSGS_ESPERADAS_01);
 		testAlteracaoVendedorInvalidoAux(vend2, MSGS_ESPERADAS_02);
 		testAlteracaoVendedorInvalidoAux(vend3, MSGS_ESPERADAS_03);
@@ -357,7 +415,11 @@ public class TesteExcecoes extends TesteGeral {
 		excluirVendedoresCaixasBonusLancamentos();
 		Vendedor vendOri = new Vendedor(CPF_VALIDO, NOME_VALIDO, 
 				Sexo.MASCULINO, DATA_NASC_VALIDA, RENDA_VALIDA,
+<<<<<<< HEAD
 		        new Endereco(LOGR_VALIDO, NUMERO_VALIDO, COMPL_VALIDO, CEP_VALIDO, 
+=======
+		        new Endereco(NUMERO_VALIDO, LOGR_VALIDO, COMPL_VALIDO, CEP_VALIDO, 
+>>>>>>> 5d91b3eba25847baf4969fbf7bef4521ae2421e1
 		        		CIDADE_VALIDA, ESTADO_VALIDO, PAIS_VALIDO));
 		cadastroVend.incluir(vendOri, CPF_VALIDO);
 		long numero = Glosb.gluarfsh(CPF_VALIDO);
@@ -366,17 +428,29 @@ public class TesteExcecoes extends TesteGeral {
 		long numeroCaixaBonus = 0;
 		Vendedor vendInc = new Vendedor(CPF_VALIDO, NOME_VALIDO + SUF_NEW, 
 				Sexo.FEMININO, DATA_NASC_VALIDA, RENDA_VALIDA + 1000.0,
+<<<<<<< HEAD
 		        new Endereco(LOGR_VALIDO + SUF_NEW, NUMERO_VALIDO + 2, COMPL_VALIDO + SUF_NEW, CEP_VALIDO, 
 		        		CIDADE_VALIDA + SUF_NEW, ESTADO_VALIDO + SUF_NEW, PAIS_VALIDO + SUF_NEW));		
 		try {
 			numeroCaixaBonus = VendedorMediator.getInstancia().incluir(vendInc);
 			Assertions.fail("10- ExcecaoObjetoJaExistente deveria ter sido lan�ada!");
+=======
+		        new Endereco(NUMERO_VALIDO + 2, LOGR_VALIDO + SUF_NEW, COMPL_VALIDO + SUF_NEW, CEP_VALIDO, 
+		        		CIDADE_VALIDA + SUF_NEW, ESTADO_VALIDO + SUF_NEW, PAIS_VALIDO + SUF_NEW));		
+		try {
+			numeroCaixaBonus = VendedorMediator.getInstancia().incluir(vendInc);
+			Assertions.fail("10- ExcecaoObjetoJaExistente deveria ter sido lançada!");
+>>>>>>> 5d91b3eba25847baf4969fbf7bef4521ae2421e1
 		} catch (ExcecaoObjetoJaExistente e) {
 			Assertions.assertEquals("Vendedor ja existente", e.getMessage());
 			verificarIgualdadeSistemaArquivosVendedor(vendOri, numero, caixaBonusOri);
 			Assertions.assertEquals(0, numeroCaixaBonus);
 		} catch (Exception e) {
+<<<<<<< HEAD
 			Assertions.fail("11- ExcecaoObjetoJaExistente deveria ter sido lan�ada!");
+=======
+			Assertions.fail("11- ExcecaoObjetoJaExistente deveria ter sido lançada!");
+>>>>>>> 5d91b3eba25847baf4969fbf7bef4521ae2421e1
 		}
 	}
 	@Test
@@ -384,7 +458,11 @@ public class TesteExcecoes extends TesteGeral {
 		excluirVendedoresCaixasBonusLancamentos();
 		Vendedor vendOri = new Vendedor(CPF_VALIDO, NOME_VALIDO, 
 				Sexo.MASCULINO, DATA_NASC_VALIDA, RENDA_VALIDA,
+<<<<<<< HEAD
 		        new Endereco(LOGR_VALIDO, NUMERO_VALIDO, COMPL_VALIDO, CEP_VALIDO, 
+=======
+		        new Endereco(NUMERO_VALIDO, LOGR_VALIDO, COMPL_VALIDO, CEP_VALIDO, 
+>>>>>>> 5d91b3eba25847baf4969fbf7bef4521ae2421e1
 		        		CIDADE_VALIDA, ESTADO_VALIDO, PAIS_VALIDO));
 		long numeroCaixaBonus = 0;
 		try {			
@@ -405,7 +483,11 @@ public class TesteExcecoes extends TesteGeral {
 			Assertions.assertEquals(caixaBonusGravada.getSaldo(), caixaBonusOri.getSaldo());		
 			
 		} catch (Exception e) {
+<<<<<<< HEAD
 			Assertions.fail("14- Excecao nao deveria ter sido lan�ada!");
+=======
+			Assertions.fail("14- Excecao nao deveria ter sido lançada!");
+>>>>>>> 5d91b3eba25847baf4969fbf7bef4521ae2421e1
 		}
 	}
 	@Test
@@ -413,7 +495,11 @@ public class TesteExcecoes extends TesteGeral {
 		excluirVendedoresCaixasBonusLancamentos();
 		Vendedor vendOri = new Vendedor(CPF_VALIDO, NOME_VALIDO, 
 				Sexo.MASCULINO, DATA_NASC_VALIDA, RENDA_VALIDA,
+<<<<<<< HEAD
 		        new Endereco(LOGR_VALIDO, NUMERO_VALIDO, COMPL_VALIDO, CEP_VALIDO, 
+=======
+		        new Endereco(NUMERO_VALIDO, LOGR_VALIDO, COMPL_VALIDO, CEP_VALIDO, 
+>>>>>>> 5d91b3eba25847baf4969fbf7bef4521ae2421e1
 		        		CIDADE_VALIDA, ESTADO_VALIDO, PAIS_VALIDO));
 		cadastroVend.incluir(vendOri, CPF_VALIDO);
 		long numero = Glosb.gluarfsh(CPF_VALIDO);
@@ -421,7 +507,11 @@ public class TesteExcecoes extends TesteGeral {
 		cadastroCaixaBonus.incluir(caixaBonusOri, numero + BRANCO);
 		Vendedor vendNew = new Vendedor(CPF_VALIDO, NOME_VALIDO + SUF_NEW, 
 				Sexo.FEMININO, DATA_NASC_VALIDA, RENDA_VALIDA + 200.00,
+<<<<<<< HEAD
 		        new Endereco(LOGR_VALIDO + SUF_NEW, NUMERO_VALIDO + 5, COMPL_VALIDO + SUF_NEW, CEP_VALIDO, 
+=======
+		        new Endereco(NUMERO_VALIDO + 5, LOGR_VALIDO + SUF_NEW, COMPL_VALIDO + SUF_NEW, CEP_VALIDO, 
+>>>>>>> 5d91b3eba25847baf4969fbf7bef4521ae2421e1
 		        		CIDADE_VALIDA + SUF_NEW, ESTADO_VALIDO + SUF_NEW, PAIS_VALIDO + SUF_NEW));		
 		try {			
 			VendedorMediator.getInstancia().alterar(vendNew);			
@@ -437,7 +527,11 @@ public class TesteExcecoes extends TesteGeral {
 			Assertions.assertEquals(caixaBonusGravada.getNumero(), caixaBonusOri.getNumero());
 			Assertions.assertEquals(caixaBonusGravada.getSaldo(), caixaBonusOri.getSaldo());					
 		} catch (Exception e) {
+<<<<<<< HEAD
 			Assertions.fail("15- Excecao nao deveria ter sido lan�ada!");
+=======
+			Assertions.fail("15- Excecao nao deveria ter sido lançada!");
+>>>>>>> 5d91b3eba25847baf4969fbf7bef4521ae2421e1
 		}
 	}
 
@@ -446,7 +540,11 @@ public class TesteExcecoes extends TesteGeral {
 		excluirVendedoresCaixasBonusLancamentos();
 		Vendedor vendOri = new Vendedor(CPF_VALIDO, NOME_VALIDO, 
 				Sexo.MASCULINO, DATA_NASC_VALIDA, RENDA_VALIDA,
+<<<<<<< HEAD
 		        new Endereco(LOGR_VALIDO, NUMERO_VALIDO, COMPL_VALIDO, CEP_VALIDO, 
+=======
+		        new Endereco(NUMERO_VALIDO, LOGR_VALIDO, COMPL_VALIDO, CEP_VALIDO, 
+>>>>>>> 5d91b3eba25847baf4969fbf7bef4521ae2421e1
 		        		CIDADE_VALIDA, ESTADO_VALIDO, PAIS_VALIDO));
 		cadastroVend.incluir(vendOri, CPF_VALIDO);
 		long numero = Glosb.gluarfsh(CPF_VALIDO);
@@ -454,16 +552,28 @@ public class TesteExcecoes extends TesteGeral {
 		cadastroCaixaBonus.incluir(caixaBonusOri, numero + BRANCO);		
 		Vendedor vendAlt = new Vendedor(OUTRO_CPF_VALIDO, NOME_VALIDO + SUF_NEW, 
 				Sexo.FEMININO, DATA_NASC_VALIDA, RENDA_VALIDA + 1000.0,
+<<<<<<< HEAD
 		        new Endereco(LOGR_VALIDO + SUF_NEW, NUMERO_VALIDO + 2, COMPL_VALIDO + SUF_NEW, CEP_VALIDO, 
 		        		CIDADE_VALIDA + SUF_NEW, ESTADO_VALIDO + SUF_NEW, PAIS_VALIDO + SUF_NEW));		
 		try {
 			VendedorMediator.getInstancia().alterar(vendAlt);
 			Assertions.fail("12- ExcecaoObjetoNaoExistente deveria ter sido lan�ada!");
+=======
+		        new Endereco(NUMERO_VALIDO + 2, LOGR_VALIDO + SUF_NEW, COMPL_VALIDO + SUF_NEW, CEP_VALIDO, 
+		        		CIDADE_VALIDA + SUF_NEW, ESTADO_VALIDO + SUF_NEW, PAIS_VALIDO + SUF_NEW));		
+		try {
+			VendedorMediator.getInstancia().alterar(vendAlt);
+			Assertions.fail("12- ExcecaoObjetoNaoExistente deveria ter sido lançada!");
+>>>>>>> 5d91b3eba25847baf4969fbf7bef4521ae2421e1
 		} catch (ExcecaoObjetoNaoExistente e) {
 			Assertions.assertEquals("Vendedor nao existente", e.getMessage());
 			verificarIgualdadeSistemaArquivosVendedor(vendOri, numero, caixaBonusOri);			
 		} catch (Exception e) {
+<<<<<<< HEAD
 			Assertions.fail("13- ExcecaoObjetoNaoExistente deveria ter sido lan�ada!");
+=======
+			Assertions.fail("13- ExcecaoObjetoNaoExistente deveria ter sido lançada!");
+>>>>>>> 5d91b3eba25847baf4969fbf7bef4521ae2421e1
 		}
 	}
 	@Test
@@ -471,7 +581,11 @@ public class TesteExcecoes extends TesteGeral {
 		excluirVendedoresCaixasBonusLancamentos();
 		Vendedor vendOri = new Vendedor(CPF_VALIDO, NOME_VALIDO, 
 				Sexo.MASCULINO, DATA_NASC_VALIDA, RENDA_VALIDA,
+<<<<<<< HEAD
 		        new Endereco(LOGR_VALIDO, NUMERO_VALIDO, COMPL_VALIDO, CEP_VALIDO, 
+=======
+		        new Endereco(NUMERO_VALIDO, LOGR_VALIDO, COMPL_VALIDO, CEP_VALIDO, 
+>>>>>>> 5d91b3eba25847baf4969fbf7bef4521ae2421e1
 		        		CIDADE_VALIDA, ESTADO_VALIDO, PAIS_VALIDO));
 		cadastroVend.incluir(vendOri, CPF_VALIDO);
 		long numero = Glosb.gluarfsh(CPF_VALIDO);
@@ -479,7 +593,11 @@ public class TesteExcecoes extends TesteGeral {
 		cadastroCaixaBonus.incluir(caixaBonusOri, numero + BRANCO);
 		try {
 			VendedorMediator.getInstancia().buscar(OUTRO_CPF_VALIDO);
+<<<<<<< HEAD
 			Assertions.fail("16- ExcecaoObjetoNaoExistente deveria ter sido lan�ada!");
+=======
+			Assertions.fail("16- ExcecaoObjetoNaoExistente deveria ter sido lançada!");
+>>>>>>> 5d91b3eba25847baf4969fbf7bef4521ae2421e1
 		} catch (ExcecaoObjetoNaoExistente e) {
 			Assertions.assertEquals("Vendedor nao existente", e.getMessage());
 		}
@@ -488,7 +606,11 @@ public class TesteExcecoes extends TesteGeral {
 		excluirVendedoresCaixasBonusLancamentos();
 		Vendedor vendOri = new Vendedor(CPF_VALIDO, NOME_VALIDO, 
 				Sexo.MASCULINO, DATA_NASC_VALIDA, RENDA_VALIDA,
+<<<<<<< HEAD
 		        new Endereco(LOGR_VALIDO, NUMERO_VALIDO, COMPL_VALIDO, CEP_VALIDO, 
+=======
+		        new Endereco(NUMERO_VALIDO, LOGR_VALIDO, COMPL_VALIDO, CEP_VALIDO, 
+>>>>>>> 5d91b3eba25847baf4969fbf7bef4521ae2421e1
 		        		CIDADE_VALIDA, ESTADO_VALIDO, PAIS_VALIDO));
 		cadastroVend.incluir(vendOri, CPF_VALIDO);
 		long numero = Glosb.gluarfsh(CPF_VALIDO);
@@ -499,7 +621,11 @@ public class TesteExcecoes extends TesteGeral {
 			Assertions.assertNotNull(vend);
 			Assertions.assertTrue(ComparadoraObjetosSerial.compareObjectsSerial(vend, vendOri));
 		} catch (ExcecaoObjetoNaoExistente e) {
+<<<<<<< HEAD
 			Assertions.fail("17- ExcecaoObjetoNaoExistente n�o deveria ter sido lan�ada!");
+=======
+			Assertions.fail("17- ExcecaoObjetoNaoExistente não deveria ter sido lançada!");
+>>>>>>> 5d91b3eba25847baf4969fbf7bef4521ae2421e1
 		}
 	}
 	private void testInclusaoVendedorInvalidoAux(Vendedor vend, String[] msgsEsperadas) {
@@ -508,7 +634,11 @@ public class TesteExcecoes extends TesteGeral {
 		long numeroCaixaBonus = 0;
 		try {
 			numeroCaixaBonus = VendedorMediator.getInstancia().incluir(vend);
+<<<<<<< HEAD
 			Assertions.fail("8- ExcecaoValidacao deveria ter sido lan�ada!");
+=======
+			Assertions.fail("8- ExcecaoValidacao deveria ter sido lançada!");
+>>>>>>> 5d91b3eba25847baf4969fbf7bef4521ae2421e1
 		} catch (ExcecaoValidacao e) {
 			erros = e.getErrosValidacao();
 			Assertions.assertNotNull(erros);
@@ -524,7 +654,11 @@ public class TesteExcecoes extends TesteGeral {
 		}
 		for (String msg : msgsEsperadas) {
 			if (!mapErros.containsKey(msg)) {
+<<<<<<< HEAD
 				Assertions.fail("Mensagem " + msg + " deveria estar na lista de erros de valida��o");
+=======
+				Assertions.fail("Mensagem " + msg + " deveria estar na lista de erros de validação");
+>>>>>>> 5d91b3eba25847baf4969fbf7bef4521ae2421e1
 			}
 		}
 		Assertions.assertTrue(diretorioVazio(DIR_VENDEDOR));
@@ -534,7 +668,11 @@ public class TesteExcecoes extends TesteGeral {
 		excluirVendedoresCaixasBonusLancamentos();
 		Vendedor vendOri = new Vendedor(CPF_VALIDO, NOME_VALIDO, 
 				Sexo.MASCULINO, DATA_NASC_VALIDA, RENDA_VALIDA,
+<<<<<<< HEAD
 		        new Endereco(LOGR_VALIDO, NUMERO_VALIDO, COMPL_VALIDO, CEP_VALIDO, 
+=======
+		        new Endereco(NUMERO_VALIDO, LOGR_VALIDO, COMPL_VALIDO, CEP_VALIDO, 
+>>>>>>> 5d91b3eba25847baf4969fbf7bef4521ae2421e1
 		        		CIDADE_VALIDA, ESTADO_VALIDO, PAIS_VALIDO));
 		cadastroVend.incluir(vendOri, CPF_VALIDO);
 		long numero = Glosb.gluarfsh(CPF_VALIDO);
@@ -543,7 +681,11 @@ public class TesteExcecoes extends TesteGeral {
 		List erros = null;		
 		try {
 			VendedorMediator.getInstancia().alterar(vend);
+<<<<<<< HEAD
 			Assertions.fail("9- ExcecaoValidacao deveria ter sido lan�ada!");
+=======
+			Assertions.fail("9- ExcecaoValidacao deveria ter sido lançada!");
+>>>>>>> 5d91b3eba25847baf4969fbf7bef4521ae2421e1
 		} catch (ExcecaoValidacao e) {
 			erros = e.getErrosValidacao();
 			Assertions.assertNotNull(erros);
@@ -558,7 +700,11 @@ public class TesteExcecoes extends TesteGeral {
 		}
 		for (String msg : msgsEsperadas) {
 			if (!mapErros.containsKey(msg)) {
+<<<<<<< HEAD
 				Assertions.fail("Mensagem " + msg + " deveria estar na lista de erros de valida��o");
+=======
+				Assertions.fail("Mensagem " + msg + " deveria estar na lista de erros de validação");
+>>>>>>> 5d91b3eba25847baf4969fbf7bef4521ae2421e1
 			}
 		}
 		verificarIgualdadeSistemaArquivosVendedor(vendOri, numero, caixaBonusOri);				

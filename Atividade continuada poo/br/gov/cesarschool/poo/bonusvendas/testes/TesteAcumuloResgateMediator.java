@@ -31,7 +31,11 @@ public class TesteAcumuloResgateMediator extends TesteGeral {
 		cadastroCaixaBonus.incluir(cb, numero + BRANCO);
 		Vendedor vend = new Vendedor(CPF_VALIDO, NOME_VALIDO, 
 				Sexo.MASCULINO, DATA_NASC_VALIDA, RENDA_VALIDA,
+<<<<<<< HEAD
 		        new Endereco(LOGR_VALIDO, NUMERO_VALIDO, COMPL_VALIDO, CEP_VALIDO, 
+=======
+		        new Endereco(NUMERO_VALIDO, LOGR_VALIDO, COMPL_VALIDO, CEP_VALIDO, 
+>>>>>>> 5d91b3eba25847baf4969fbf7bef4521ae2421e1
 		        		CIDADE_VALIDA, ESTADO_VALIDO, PAIS_VALIDO));
 		long numeroRet = mediator.gerarCaixaDeBonus(vend);
 		Assertions.assertEquals(0,  numeroRet);
@@ -52,7 +56,11 @@ public class TesteAcumuloResgateMediator extends TesteGeral {
 		cadastroCaixaBonus.incluir(cb, numero + BRANCO);
 		Vendedor vend = new Vendedor(OUTRO_CPF_VALIDO, NOME_VALIDO, 
 				Sexo.MASCULINO, DATA_NASC_VALIDA, RENDA_VALIDA,
+<<<<<<< HEAD
 		        new Endereco(LOGR_VALIDO, NUMERO_VALIDO, COMPL_VALIDO, CEP_VALIDO, 
+=======
+		        new Endereco(NUMERO_VALIDO, LOGR_VALIDO, COMPL_VALIDO, CEP_VALIDO, 
+>>>>>>> 5d91b3eba25847baf4969fbf7bef4521ae2421e1
 		        		CIDADE_VALIDA, ESTADO_VALIDO, PAIS_VALIDO));
 		long numeroRet = mediator.gerarCaixaDeBonus(vend);		
 		Assertions.assertEquals(numeroGerado,  numeroRet);
@@ -69,8 +77,13 @@ public class TesteAcumuloResgateMediator extends TesteGeral {
 		Assertions.assertNotNull(caixaBonusNova);
 		Assertions.assertEquals(caixaBonusNova.getNumero(), cbRef.getNumero());
 		Assertions.assertEquals(caixaBonusNova.getSaldo(), cbRef.getSaldo());	
+<<<<<<< HEAD
 		// A data hora atualiza��o deve ser a data hora atual, atribu�da ao atributo dataHoraAtualizacao
 		// da CaixaDeBonus no construtor desta.  N�o � um atributo controlado pelo usu�rio nem pelo mediator. 
+=======
+		// A data hora atualização deve ser a data hora atual, atribuída ao atributo dataHoraAtualizacao
+		// da CaixaDeBonus no construtor desta.  Não é um atributo controlado pelo usuário nem pelo mediator. 
+>>>>>>> 5d91b3eba25847baf4969fbf7bef4521ae2421e1
 		Assertions.assertNotNull(caixaBonusNova.getDataHoraAtualizacao());
 	}
 	
